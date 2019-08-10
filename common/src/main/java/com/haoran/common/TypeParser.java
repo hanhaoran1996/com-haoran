@@ -150,7 +150,7 @@ public final class TypeParser {
     }
 
     public static String parse2String(Object obj) {
-        return parse2String(obj, Const.STR_EMPTY);
+        return parse2String(obj, Const.EMPTY);
     }
 
     public static String parse2String(Object obj, String defaultValue) {

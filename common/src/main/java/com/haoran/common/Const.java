@@ -31,13 +31,12 @@ public final class Const {
     public static final int INT4096 = 1 << 12;
     public static final int INT8192 = 1 << 13;
 
-    public static final String STR_EMPTY = "";
-    public static final String STR_OK = "OK";
-    public static final String STR_UNDERLINE = "_";
-    public static final String STR_HYPHEN = "-";
-    public static final String STR_SLASH = "/";
-    public static final String STR_COMMA = ",";
-    public static final String STR_DOT = ".";
+    public static final String EMPTY = "";
+    public static final String UNDERLINE = "_";
+    public static final String HYPHEN = "-";
+    public static final String SLASH = "/";
+    public static final String COMMA = ",";
+    public static final String DOT = ".";
 
     public static final String A = "A";
     public static final String B = "B";

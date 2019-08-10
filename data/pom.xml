@@ -9,6 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>data</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>data-elastic</module>
+    </modules>
 </project>

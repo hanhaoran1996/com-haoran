@@ -1,6 +1,7 @@
 package com.haoran.com;
 
 import com.haoran.common.NtConfig;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -12,9 +13,7 @@ public class CommonTest {
 
     @Test
     public void test() {
-        System.out.println(NtConfig.getAppId());
-        System.out.println(NtConfig.getConfigPath());
-        System.out.println(NtConfig.getJdkVersion());
-        System.out.println(NtConfig.getProperties("test.properties"));
+        Assert.assertEquals("00000", NtConfig.getAppId());
+        Assert.assertEquals("1.8", NtConfig.getJdkVersion());
     }
 }

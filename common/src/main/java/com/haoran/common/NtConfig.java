@@ -79,13 +79,13 @@ public final class NtConfig {
 
         Properties properties;
 
-        File file = new File(CONFIG_PATH + Const.STR_SLASH + filename);
+        File file = new File(CONFIG_PATH + Const.SLASH + APP_ID + Const.SLASH + filename);
         if (file.exists()) {
             properties = Files.read2Properties(file);
             return properties;
         }
 
-        file = new File(CONFIG_PATH + Const.STR_SLASH + APP_ID + Const.STR_SLASH + filename);
+        file = new File(CONFIG_PATH + Const.SLASH + APP_ID + Const.SLASH + filename);
         if (file.exists()) {
             properties = Files.read2Properties(file);
             return properties;
