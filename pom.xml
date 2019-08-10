@@ -7,6 +7,9 @@
     <groupId>com.haoran</groupId>
     <artifactId>super-pom</artifactId>
     <version>1.0.0</version>
+    <modules>
+        <module>common</module>
+    </modules>
 
     <packaging>pom</packaging>
 
