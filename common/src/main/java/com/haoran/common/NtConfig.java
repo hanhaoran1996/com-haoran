@@ -57,18 +57,15 @@ public final class NtConfig {
         );
     }
 
-    public static String getProperty(String filename, String key) {
-        return getProperty(filename, key, null);
+    public static String getProperty(String key) {
+        return getProperty(key, Const.EMPTY);
     }
 
-    public static String getProperty(String filename, String key, String defaultValue) {
-        if (APP_PROPERTIES.equals(filename)) {
-            return PROPERTIES.getProperty(key, defaultValue);
-        }
-        return getProperties(filename).getProperty(key, defaultValue);
+    public static String getProperty(String key, String defaultValue) {
+        return PROPERTIES.getProperty(key, defaultValue);
     }
 
-    public static Properties getProperties(String filename) {
+    public static Properties get(String filename) {
         if (Objects.isNullOrEmpty(filename)) {
             return new Properties();
         }
