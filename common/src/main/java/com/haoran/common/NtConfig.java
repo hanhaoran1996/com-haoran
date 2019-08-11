@@ -76,7 +76,7 @@ public final class NtConfig {
 
         Properties properties;
 
-        File file = new File(CONFIG_PATH + Const.SLASH + APP_ID + Const.SLASH + filename);
+        File file = new File(CONFIG_PATH + Const.SLASH + filename);
         if (file.exists()) {
             properties = Files.read2Properties(file);
             return properties;
