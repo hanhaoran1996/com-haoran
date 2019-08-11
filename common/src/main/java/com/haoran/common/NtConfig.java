@@ -49,12 +49,21 @@ public final class NtConfig {
         }
 
         PROPERTIES = properties;
-        APP_ID = properties.getProperty(APP_ID_KEY, APP_ID_DEF);
-        JDK_VERSION = properties.getProperty(JDK_VERSION_KEY, JDK_VERSION_DEF);
-        CONFIG_PATH = properties.getProperty(
-                CONFIG_PATH_KEY,
-                (Os.WINDOWS == Os.get()) ? CONFIG_PATH_WIN_DEF : CONFIG_PATH_UNIX_DEF
-        );
+        String appId = properties.getProperty(APP_ID_KEY);
+        APP_ID = Objects.isNullOrEmpty(appId) ? APP_ID_DEF : appId;
+        String jdkVersion = properties.getProperty(JDK_VERSION_KEY, JDK_VERSION_DEF);
+        JDK_VERSION = Objects.isNullOrEmpty(jdkVersion) ? JDK_VERSION_DEF : jdkVersion;
+        String configPath = properties.getProperty(CONFIG_PATH_KEY);
+        CONFIG_PATH = Objects.isNullOrEmpty(configPath)
+                ? ((Os.WINDOWS == Os.get()) ? CONFIG_PATH_WIN_DEF : CONFIG_PATH_UNIX_DEF)
+                : configPath;
+
+        logger.info("********************************************************************");
+        logger.info("****** APP CONFIGS *************************************************");
+        logger.info("****************** app id: " + APP_ID);
+        logger.info("****************** jdk version: " + JDK_VERSION);
+        logger.info("****************** config path: " + CONFIG_PATH);
+        logger.info("********************************************************************");
     }
 
     public static String getProperty(String key) {
