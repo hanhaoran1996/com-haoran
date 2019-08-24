@@ -1,4 +1,4 @@
-package com.haoran.common.utils;
+package com.haoran.common.u;
 
 import java.util.Collection;
 import java.util.Map;
@@ -8,24 +8,8 @@ import java.util.Map;
  * @date 2019/5/12 18:50
  */
 
-public final class Objects {
-    private Objects() {}
-
-    public static <T> T requireNotNull(T obj) {
-        if (isNull(obj)) {
-            throw new NullPointerException();
-        }
-
-        return obj;
-    }
-
-    public static <T> T requireNotNull(T obj, String msg) {
-        if (isNull(obj)) {
-            throw new NullPointerException(msg);
-        }
-
-        return obj;
-    }
+public final class U4Object {
+    private U4Object() {}
 
     public static boolean isNull(Object obj) {
         return obj == null;

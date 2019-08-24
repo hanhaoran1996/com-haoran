@@ -2,8 +2,8 @@ package com.haoran.data.elastic;
 
 import com.haoran.common.Const;
 import com.haoran.common.NtConfig;
-import com.haoran.common.TypeParser;
-import com.haoran.common.utils.Objects;
+import com.haoran.common.Parser;
+import com.haoran.common.u.U4Object;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
@@ -35,7 +35,7 @@ class ElasticClientLoader {
             TransportClient tc;
             try {
                 String addressesStr = NtConfig.getProperty(NtConfig.APP_PROPERTIES, KEY_ELASTIC_PREFIX + KEY_ADDRESSES);
-                if (Objects.isNull(addressesStr)) {
+                if (U4Object.isNull(addressesStr)) {
                     addressesStr = NtConfig.getProperty("elastic.properties", KEY_ADDRESSES);
                 }
 
@@ -46,20 +46,20 @@ class ElasticClientLoader {
                 Integer port;
 
                 for (String address : addresses) {
-                    if (Objects.isNullOrEmpty(address)) {
+                    if (U4Object.isNullOrEmpty(address)) {
                         continue;
                     }
 
                     String[] parts = address.split(":");
                     host = parts[0];
-                    if (Objects.isNullOrEmpty(host)) {
+                    if (U4Object.isNullOrEmpty(host)) {
                         continue;
                     }
 
                     if (parts.length == Const.INT1) {
                         port = 9300;
                     } else {
-                        port = TypeParser.parse2Integer(parts[1]);
+                        port = Parser.parse2Integer(parts[1]);
                     }
 
                     tc.addTransportAddress(

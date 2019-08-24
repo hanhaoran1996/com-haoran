@@ -1,6 +1,6 @@
 package com.haoran.data.elastic;
 
-import com.haoran.common.utils.Objects;
+import com.haoran.common.u.U4Object;
 import org.elasticsearch.action.ActionFuture;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -42,7 +42,7 @@ public class CommonIndexer {
     private static <T extends Doc> BulkRequest buildIndexBulkRequest(List<T> docs) {
         final BulkRequest request = new BulkRequest();
         docs.forEach(doc -> {
-            if (Objects.nonNull(doc)) {
+            if (U4Object.nonNull(doc)) {
                 request.add(buildIndexRequest(doc));
             }
         });
@@ -93,7 +93,7 @@ public class CommonIndexer {
     private static <T extends Doc> BulkRequest buildUpdateBulkRequest(List<T> docs, boolean upsert) {
         final BulkRequest request = new BulkRequest();
         docs.forEach(doc -> {
-            if (Objects.nonNull(doc)) {
+            if (U4Object.nonNull(doc)) {
                 request.add(buildUpdateRequest(doc, upsert));
             }
         });
@@ -129,7 +129,7 @@ public class CommonIndexer {
     private static <T extends Doc> BulkRequest buildDeleteBulkRequest(List<T> docs) {
         final BulkRequest request = new BulkRequest();
         docs.forEach(doc -> {
-            if (Objects.nonNull(doc)) {
+            if (U4Object.nonNull(doc)) {
                 request.add(buildDeleteRequest(doc));
             }
         });

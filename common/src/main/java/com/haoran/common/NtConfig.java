@@ -1,7 +1,7 @@
 package com.haoran.common;
 
-import com.haoran.common.utils.Files;
-import com.haoran.common.utils.Objects;
+import com.haoran.common.u.U4File;
+import com.haoran.common.u.U4Object;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,22 +39,22 @@ public final class NtConfig {
     static {
         Properties properties = null;
         try (InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(APP_PROPERTIES)) {
-            properties = Files.read2Properties(stream, false);
+            properties = U4File.read2Properties(stream, false);
         } catch (IOException e) {
             logger.error("load app properties failed", e);
         }
 
-        if (Objects.isNullOrEmpty(properties)) {
+        if (U4Object.isNullOrEmpty(properties)) {
             properties = new Properties();
         }
 
         PROPERTIES = properties;
         String appId = properties.getProperty(APP_ID_KEY);
-        APP_ID = Objects.isNullOrEmpty(appId) ? APP_ID_DEF : appId;
+        APP_ID = U4Object.isNullOrEmpty(appId) ? APP_ID_DEF : appId;
         String jdkVersion = properties.getProperty(JDK_VERSION_KEY, JDK_VERSION_DEF);
-        JDK_VERSION = Objects.isNullOrEmpty(jdkVersion) ? JDK_VERSION_DEF : jdkVersion;
+        JDK_VERSION = U4Object.isNullOrEmpty(jdkVersion) ? JDK_VERSION_DEF : jdkVersion;
         String configPath = properties.getProperty(CONFIG_PATH_KEY);
-        CONFIG_PATH = Objects.isNullOrEmpty(configPath)
+        CONFIG_PATH = U4Object.isNullOrEmpty(configPath)
                 ? ((Os.WINDOWS == Os.get()) ? CONFIG_PATH_WIN_DEF : CONFIG_PATH_UNIX_DEF)
                 : configPath;
 
@@ -75,7 +75,7 @@ public final class NtConfig {
     }
 
     public static Properties get(String filename) {
-        if (Objects.isNullOrEmpty(filename)) {
+        if (U4Object.isNullOrEmpty(filename)) {
             return new Properties();
         }
 
@@ -87,18 +87,18 @@ public final class NtConfig {
 
         File file = new File(CONFIG_PATH + Const.SLASH + filename);
         if (file.exists()) {
-            properties = Files.read2Properties(file);
+            properties = U4File.read2Properties(file);
             return properties;
         }
 
         file = new File(CONFIG_PATH + Const.SLASH + APP_ID + Const.SLASH + filename);
         if (file.exists()) {
-            properties = Files.read2Properties(file);
+            properties = U4File.read2Properties(file);
             return properties;
         }
 
         try (InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(filename)) {
-            properties = Files.read2Properties(stream, false);
+            properties = U4File.read2Properties(stream, false);
         } catch (IOException e) {
             throw new IllegalStateException("file [" + filename + "] doesn't exist, please recheck");
         }

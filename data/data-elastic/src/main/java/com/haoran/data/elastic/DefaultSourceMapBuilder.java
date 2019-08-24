@@ -1,7 +1,7 @@
 package com.haoran.data.elastic;
 
 import com.haoran.common.Const;
-import com.haoran.common.utils.Objects;
+import com.haoran.common.u.U4Object;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +31,7 @@ class DefaultSourceMapBuilder {
                 Arrays.stream(fields).forEach(field -> {
                     field.setAccessible(true);
                     DocField docField = field.getAnnotation(DocField.class);
-                    if (Objects.isNull(docField) || !docField.index()) {
+                    if (U4Object.isNull(docField) || !docField.index()) {
                         return;
                     }
                     fieldMap.put(Const.EMPTY.equals(docField.name()) ? field.getName() : docField.name(), field);
@@ -48,7 +48,7 @@ class DefaultSourceMapBuilder {
             for (Map.Entry<String, Field> entry : fieldMap.entrySet()) {
                 Field field = entry.getValue();
                 Object val = field.get(doc);
-                if (Objects.nonNull(val)) {
+                if (U4Object.nonNull(val)) {
                     result.put(entry.getKey(), val);
                 }
             }

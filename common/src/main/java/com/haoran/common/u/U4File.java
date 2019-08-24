@@ -1,4 +1,4 @@
-package com.haoran.common.utils;
+package com.haoran.common.u;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +14,10 @@ import java.util.Properties;
  * @date 2019/5/12 19:03
  */
 
-public final class Files {
-    private Files() {}
+public final class U4File {
+    private U4File() {}
 
-    private static final Logger logger = LoggerFactory.getLogger(Files.class);
+    private static final Logger logger = LoggerFactory.getLogger(U4File.class);
     private static final String UTF8 = "UTF-8";
 
     /* Get File Content With List<String> --------------------------------------------------------------------------- */

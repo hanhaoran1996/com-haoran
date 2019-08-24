@@ -1,15 +1,14 @@
 package com.haoran.common;
 
-
-import com.haoran.common.utils.Objects;
+import com.haoran.common.u.U4Object;
 
 /**
  * @author hr.han
  * @date 2019/5/12 20:25
  */
 
-public final class TypeParser {
-    private TypeParser() {
+public final class Parser {
+    private Parser() {
     }
 
     private static final Character CHARACTER = ' ';
@@ -27,7 +26,7 @@ public final class TypeParser {
 
     public static Character parse2Character(Object obj, Character defaultValue) {
         String tmp = parse2String(obj);
-        if (Objects.isNullOrEmpty(tmp)) {
+        if (U4Object.isNullOrEmpty(tmp)) {
             return defaultValue;
         }
         return tmp.charAt(0);
@@ -38,7 +37,7 @@ public final class TypeParser {
     }
 
     public static Boolean parse2Boolean(Object obj, Boolean defaultValue) {
-        if (Objects.isNull(obj)) {
+        if (U4Object.isNull(obj)) {
             return defaultValue;
         }
 
@@ -58,7 +57,7 @@ public final class TypeParser {
     }
 
     public static Byte parse2Byte(Object obj, int radix, Byte defaultValue) {
-        if (Objects.isNull(obj)) {
+        if (U4Object.isNull(obj)) {
             return defaultValue;
         }
 
@@ -78,7 +77,7 @@ public final class TypeParser {
     }
 
     public static Short parse2Short(Object obj, int radix, Short defaultValue) {
-        if (Objects.isNull(obj)) {
+        if (U4Object.isNull(obj)) {
             return defaultValue;
         }
 
@@ -98,7 +97,7 @@ public final class TypeParser {
     }
 
     public static Integer parse2Integer(Object obj, int radix, Integer defaultValue) {
-        if (Objects.isNull(obj)) {
+        if (U4Object.isNull(obj)) {
             return defaultValue;
         }
 
@@ -118,7 +117,7 @@ public final class TypeParser {
     }
 
     public static Long parse2Long(Object obj, int radix, Long defaultValue) {
-        if (Objects.isNull(obj)) {
+        if (U4Object.isNull(obj)) {
             return defaultValue;
         }
 
@@ -130,7 +129,7 @@ public final class TypeParser {
     }
 
     public static Float parse2Float(Object obj, Float defaultValue) {
-        if (Objects.isNull(obj)) {
+        if (U4Object.isNull(obj)) {
             return defaultValue;
         }
 
@@ -142,7 +141,7 @@ public final class TypeParser {
     }
 
     public static Double parse2Double(Object obj, Double defaultValue) {
-        if (Objects.isNull(obj)) {
+        if (U4Object.isNull(obj)) {
             return defaultValue;
         }
 
@@ -154,7 +153,7 @@ public final class TypeParser {
     }
 
     public static String parse2String(Object obj, String defaultValue) {
-        if (Objects.isNull(obj)) {
+        if (U4Object.isNull(obj)) {
             return defaultValue;
         }
 

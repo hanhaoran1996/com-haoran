@@ -1,4 +1,4 @@
-package com.haoran.common.utils;
+package com.haoran.common.u;
 
 import java.sql.Timestamp;
 import java.time.*;
@@ -13,8 +13,8 @@ import java.util.GregorianCalendar;
  * @date 2019/5/13 15:58
  */
 
-public final class Times {
-    private Times() {}
+public final class U4Time {
+    private U4Time() {}
 
     public static final String DTF_DEFAULT = "yyyy-MM-dd HH:mm:ss";
     public static final String DTF_PURE = "yyyyMMddHHmmssSSS";
