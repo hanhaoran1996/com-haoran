@@ -149,7 +149,7 @@ public final class Parser {
     }
 
     public static String parse2String(Object obj) {
-        return parse2String(obj, Const.EMPTY);
+        return parse2String(obj, Constants.EMPTY);
     }
 
     public static String parse2String(Object obj, String defaultValue) {

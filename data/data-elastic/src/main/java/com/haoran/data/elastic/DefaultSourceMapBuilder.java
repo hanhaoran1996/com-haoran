@@ -1,6 +1,6 @@
 package com.haoran.data.elastic;
 
-import com.haoran.common.Const;
+import com.haoran.common.Constants;
 import com.haoran.common.u.U4Object;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ class DefaultSourceMapBuilder {
 
     static <T extends Doc> Map<String, Object> build(T doc) {
         if (! CACHE.containsKey(doc.getClass())) {
-            Map<String, Field> fieldMap = new HashMap<>(Const.INT16);
+            Map<String, Field> fieldMap = new HashMap<>(Constants.INT16);
 
             Class<?> temp = doc.getClass();
             while (! Object.class.equals(temp)) {
@@ -34,7 +34,7 @@ class DefaultSourceMapBuilder {
                     if (U4Object.isNull(docField) || !docField.index()) {
                         return;
                     }
-                    fieldMap.put(Const.EMPTY.equals(docField.name()) ? field.getName() : docField.name(), field);
+                    fieldMap.put(Constants.EMPTY.equals(docField.name()) ? field.getName() : docField.name(), field);
                 });
                 temp = temp.getSuperclass();
             }

@@ -1,6 +1,6 @@
 package com.haoran.data.elastic;
 
-import com.haoran.common.Const;
+import com.haoran.common.Constants;
 
 import java.lang.annotation.*;
 
@@ -16,5 +16,5 @@ public @interface DocField {
 
     boolean index() default true;
 
-    String name() default Const.EMPTY;
+    String name() default Constants.EMPTY;
 }

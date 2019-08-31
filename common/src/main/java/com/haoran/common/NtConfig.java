@@ -67,7 +67,7 @@ public final class NtConfig {
     }
 
     public static String getProperty(String key) {
-        return getProperty(key, Const.EMPTY);
+        return getProperty(key, Constants.EMPTY);
     }
 
     public static String getProperty(String key, String defaultValue) {
@@ -85,13 +85,13 @@ public final class NtConfig {
 
         Properties properties;
 
-        File file = new File(CONFIG_PATH + Const.SLASH + filename);
+        File file = new File(CONFIG_PATH + Constants.SLASH + filename);
         if (file.exists()) {
             properties = U4File.read2Properties(file);
             return properties;
         }
 
-        file = new File(CONFIG_PATH + Const.SLASH + APP_ID + Const.SLASH + filename);
+        file = new File(CONFIG_PATH + Constants.SLASH + APP_ID + Constants.SLASH + filename);
         if (file.exists()) {
             properties = U4File.read2Properties(file);
             return properties;

@@ -1,6 +1,6 @@
 package com.haoran.data.elastic;
 
-import com.haoran.common.Const;
+import com.haoran.common.Constants;
 import com.haoran.common.NtConfig;
 import com.haoran.common.Parser;
 import com.haoran.common.u.U4Object;
@@ -56,7 +56,7 @@ class ElasticClientLoader {
                         continue;
                     }
 
-                    if (parts.length == Const.INT1) {
+                    if (parts.length == Constants.INT1) {
                         port = 9300;
                     } else {
                         port = Parser.parse2Integer(parts[1]);

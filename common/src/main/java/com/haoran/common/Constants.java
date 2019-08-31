@@ -5,9 +5,9 @@ package com.haoran.common;
  * @date 2018/8/24
  */
 
-public final class Const {
+public final class Constants {
 
-    private Const() {}
+    private Constants() {}
 
     public static final int INT0    = 0;
     public static final int INT1    = 1;

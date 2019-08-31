@@ -21,9 +21,9 @@ public final class Task {
     private static final ExecutorService POOL = new ThreadPoolExecutor(
             Runtime.getRuntime().availableProcessors(),
             Runtime.getRuntime().availableProcessors() * 2,
-            Const.INT16,
+            Constants.INT16,
             TimeUnit.SECONDS,
-            new LinkedBlockingQueue<Runnable>(Const.INT128),
+            new LinkedBlockingQueue<Runnable>(Constants.INT128),
             new ThreadFactoryBuilder().setDaemon(true).setNameFormat("task-pool-%d").build(),
             (r, executor) -> LOGGER.warn("Task " + r.toString() + " ignored by " + executor.toString())
     );

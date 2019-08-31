@@ -15,70 +15,83 @@ import java.util.function.Function;
 public final class U4Collection {
     private U4Collection() {}
 
-    public static <E> ArrayList<E> toArrayList(String input, String delimiter, Function<String, E> action) {
+    public static <E> ArrayList<E> toArrayList(String input, String separator, Function<String, ? extends E> action) {
         if (U4Object.isNullOrEmpty(input)) {
             return ((ArrayList<E>) Collections.emptyList());
         }
 
-        Preconditions.checkNotNull(delimiter);
+        Preconditions.checkNotNull(separator);
         Preconditions.checkNotNull(action);
-        String[] src = input.split(delimiter);
+        String[] src = input.split(separator);
         ArrayList<E> dest = Lists.newArrayListWithExpectedSize(src.length);
         to(src, dest, action);
         return dest;
     }
 
-    public static <E> LinkedList<E> toLinkedList(String input, String delimiter, Function<String, E> action) {
+    public static <E> LinkedList<E> toLinkedList(String input, String separator, Function<String, ? extends E> action) {
         if (U4Object.isNullOrEmpty(input)) {
             return ((LinkedList<E>) Collections.emptyList());
         }
 
-        Preconditions.checkNotNull(delimiter);
+        Preconditions.checkNotNull(separator);
         Preconditions.checkNotNull(action);
-        String[] src = input.split(delimiter);
+        String[] src = input.split(separator);
         LinkedList<E> dest = Lists.newLinkedList();
         to(src, dest, action);
         return dest;
     }
 
-    public static <E> HashSet<E> toHashSet(String input, String delimiter, Function<String, E> action) {
+    public static <E> HashSet<E> toHashSet(String input, String separator, Function<String, ? extends E> action) {
         if (U4Object.isNullOrEmpty(input)) {
             return ((HashSet<E>) Collections.emptySet());
         }
 
-        Preconditions.checkNotNull(delimiter);
+        Preconditions.checkNotNull(separator);
         Preconditions.checkNotNull(action);
-        String[] src = input.split(delimiter);
+        String[] src = input.split(separator);
         HashSet<E> dest = Sets.newHashSetWithExpectedSize(src.length);
         to(src, dest, action);
         return dest;
     }
 
-    public static <E> LinkedHashSet<E> toLinkedHashSet(String input, String delimiter, Function<String, E> action) {
+    public static <E> LinkedHashSet<E> toLinkedHashSet(String input, String separator, Function<String, ? extends E> action) {
         if (U4Object.isNullOrEmpty(input)) {
             return ((LinkedHashSet<E>) Collections.emptySet());
         }
 
-        Preconditions.checkNotNull(delimiter);
+        Preconditions.checkNotNull(separator);
         Preconditions.checkNotNull(action);
-        String[] src = input.split(delimiter);
+        String[] src = input.split(separator);
         LinkedHashSet<E> dest = Sets.newLinkedHashSetWithExpectedSize(src.length);
         to(src, dest, action);
         return dest;
     }
 
-    public static <E> void to(String input, String delimiter, Collection<E> dest, Function<String, E> action) {
+    public static <E extends Comparable<E>> SortedSet<E> toSortedSet(String input, String separator, Function<String, ? extends E> action) {
+        if (U4Object.isNullOrEmpty(input)) {
+            return Collections.emptySortedSet();
+        }
+
+        Preconditions.checkNotNull(separator);
+        Preconditions.checkNotNull(action);
+        String[] src = input.split(separator);
+        TreeSet<E> dest = Sets.newTreeSet();
+        to(src, dest, action);
+        return dest;
+    }
+
+    public static <E> void to(String input, String separator, Collection<E> dest, Function<String, ? extends E> action) {
         if (U4Object.isNullOrEmpty(input)) {
             return;
         }
 
-        Preconditions.checkNotNull(delimiter);
+        Preconditions.checkNotNull(separator);
         Preconditions.checkNotNull(action);
-        String[] src = input.split(delimiter);
+        String[] src = input.split(separator);
         to(src, dest, action);
     }
 
-    private static <E> void to(String[] src, Collection<E> dest, Function<String, E> action) {
+    private static <E> void to(String[] src, Collection<E> dest, Function<String, ? extends E> action) {
         for (String before : src) {
             if (U4Object.isNullOrEmpty(before)) {
                 continue;
