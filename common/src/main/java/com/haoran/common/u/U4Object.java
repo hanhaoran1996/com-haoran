@@ -1,5 +1,7 @@
 package com.haoran.common.u;
 
+import com.google.common.base.Preconditions;
+
 import java.util.Collection;
 import java.util.Map;
 
@@ -10,6 +12,12 @@ import java.util.Map;
 
 public final class U4Object {
     private U4Object() {}
+
+    public static void checkNotNull(Object ... objs) {
+        for (Object obj : objs) {
+            Preconditions.checkNotNull(obj);
+        }
+    }
 
     public static boolean isNull(Object obj) {
         return obj == null;
