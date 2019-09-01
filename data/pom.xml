@@ -13,5 +13,14 @@
     <packaging>pom</packaging>
     <modules>
         <module>data-elastic</module>
+        <module>data-redis</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.haoran</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 </project>

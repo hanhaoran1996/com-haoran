@@ -23,7 +23,7 @@ public final class Task {
             Runtime.getRuntime().availableProcessors() * 2,
             Constants.INT16,
             TimeUnit.SECONDS,
-            new LinkedBlockingQueue<Runnable>(Constants.INT128),
+            new LinkedBlockingQueue<>(Constants.INT128),
             new ThreadFactoryBuilder().setDaemon(true).setNameFormat("task-pool-%d").build(),
             (r, executor) -> LOGGER.warn("Task " + r.toString() + " ignored by " + executor.toString())
     );

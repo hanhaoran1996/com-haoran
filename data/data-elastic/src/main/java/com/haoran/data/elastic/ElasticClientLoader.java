@@ -1,5 +1,6 @@
 package com.haoran.data.elastic;
 
+import com.google.common.base.Stopwatch;
 import com.haoran.common.Constants;
 import com.haoran.common.NtConfig;
 import com.haoran.common.Parser;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author hr.han
@@ -32,9 +34,11 @@ class ElasticClientLoader {
     private static final class Handler {
         static final TransportClient INSTANCE;
         static {
+            Stopwatch stopwatch = Stopwatch.createStarted();
+
             TransportClient tc;
             try {
-                String addressesStr = NtConfig.getProperty(NtConfig.APP_PROPERTIES, KEY_ELASTIC_PREFIX + KEY_ADDRESSES);
+                String addressesStr = NtConfig.getProperty(KEY_ELASTIC_PREFIX + KEY_ADDRESSES);
                 if (U4Object.isNull(addressesStr)) {
                     addressesStr = NtConfig.getProperty("elastic.properties", KEY_ADDRESSES);
                 }
@@ -77,6 +81,7 @@ class ElasticClientLoader {
 
             INSTANCE = tc;
             Runtime.getRuntime().addShutdownHook(Executors.defaultThreadFactory().newThread(INSTANCE::close));
+            logger.info("elasticSearch client init success with " + stopwatch.stop().elapsed(TimeUnit.MILLISECONDS) + " ms...");
         }
     }
 

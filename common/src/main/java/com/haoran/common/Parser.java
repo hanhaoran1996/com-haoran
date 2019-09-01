@@ -1,6 +1,9 @@
 package com.haoran.common;
 
+import com.google.common.base.Preconditions;
 import com.haoran.common.u.U4Object;
+
+import java.util.function.Function;
 
 /**
  * @author hr.han
@@ -20,6 +23,20 @@ public final class Parser {
     private static final Float FLOAT = 0F;
     private static final Double DOUBLE = 0D;
 
+    public static <S, D> D parse(S src, Function<? super S, ? extends D> action) {
+        return parse(src, null, action);
+    }
+
+    public static <S, D> D parse(S src, D defaultValue, Function<? super S, ? extends D> action) {
+        if (U4Object.isNull(src)) {
+            return defaultValue;
+        }
+
+        Preconditions.checkNotNull(action);
+        D dest = action.apply(src);
+        return U4Object.nonNull(dest) ? dest : defaultValue;
+    }
+
     public static Character parse2Character(Object obj) {
         return parse2Character(obj, CHARACTER);
     }
@@ -37,11 +54,7 @@ public final class Parser {
     }
 
     public static Boolean parse2Boolean(Object obj, Boolean defaultValue) {
-        if (U4Object.isNull(obj)) {
-            return defaultValue;
-        }
-
-        return Boolean.parseBoolean(parse2String(obj));
+        return parse(obj, defaultValue, o -> Boolean.parseBoolean(String.valueOf(o)));
     }
 
     public static Byte parse2Byte(Object obj) {
@@ -57,11 +70,7 @@ public final class Parser {
     }
 
     public static Byte parse2Byte(Object obj, int radix, Byte defaultValue) {
-        if (U4Object.isNull(obj)) {
-            return defaultValue;
-        }
-
-        return Byte.parseByte(parse2String(obj), radix);
+        return parse(obj, defaultValue, o -> Byte.parseByte(String.valueOf(o), radix));
     }
 
     public static Short parse2Short(Object obj) {
@@ -77,11 +86,7 @@ public final class Parser {
     }
 
     public static Short parse2Short(Object obj, int radix, Short defaultValue) {
-        if (U4Object.isNull(obj)) {
-            return defaultValue;
-        }
-
-        return Short.parseShort(parse2String(obj), radix);
+        return parse(obj, defaultValue, o -> Short.parseShort(String.valueOf(o), radix));
     }
 
     public static Integer parse2Integer(Object obj) {
@@ -97,11 +102,7 @@ public final class Parser {
     }
 
     public static Integer parse2Integer(Object obj, int radix, Integer defaultValue) {
-        if (U4Object.isNull(obj)) {
-            return defaultValue;
-        }
-
-        return Integer.parseInt(parse2String(obj), radix);
+        return parse(obj, defaultValue, o -> Integer.parseInt(String.valueOf(o), radix));
     }
 
     public static Long parse2Long(Object obj) {
@@ -117,11 +118,7 @@ public final class Parser {
     }
 
     public static Long parse2Long(Object obj, int radix, Long defaultValue) {
-        if (U4Object.isNull(obj)) {
-            return defaultValue;
-        }
-
-        return Long.parseLong(parse2String(obj), radix);
+        return parse(obj, defaultValue, o -> Long.parseLong(String.valueOf(o), radix));
     }
 
     public static Float parse2Float(Object obj) {
@@ -129,11 +126,7 @@ public final class Parser {
     }
 
     public static Float parse2Float(Object obj, Float defaultValue) {
-        if (U4Object.isNull(obj)) {
-            return defaultValue;
-        }
-
-        return Float.parseFloat(parse2String(obj));
+        return parse(obj, defaultValue, o -> Float.parseFloat(String.valueOf(o)));
     }
 
     public static Double parse2Double(Object obj) {
@@ -141,11 +134,7 @@ public final class Parser {
     }
 
     public static Double parse2Double(Object obj, Double defaultValue) {
-        if (U4Object.isNull(obj)) {
-            return defaultValue;
-        }
-
-        return Double.parseDouble(parse2String(obj));
+        return parse(obj, defaultValue, o -> Double.parseDouble(String.valueOf(o)));
     }
 
     public static String parse2String(Object obj) {
@@ -153,11 +142,7 @@ public final class Parser {
     }
 
     public static String parse2String(Object obj, String defaultValue) {
-        if (U4Object.isNull(obj)) {
-            return defaultValue;
-        }
-
-        return String.valueOf(obj);
+        return parse(obj, defaultValue, String::valueOf);
     }
 
 }

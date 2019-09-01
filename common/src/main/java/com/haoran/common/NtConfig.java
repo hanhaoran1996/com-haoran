@@ -1,5 +1,6 @@
 package com.haoran.common;
 
+import com.google.common.base.Preconditions;
 import com.haoran.common.u.U4File;
 import com.haoran.common.u.U4Object;
 import org.slf4j.Logger;
@@ -75,9 +76,7 @@ public final class NtConfig {
     }
 
     public static Properties get(String filename) {
-        if (U4Object.isNullOrEmpty(filename)) {
-            return new Properties();
-        }
+        Preconditions.checkNotNull(filename);
 
         if (APP_PROPERTIES.equals(filename)) {
             return PROPERTIES;
