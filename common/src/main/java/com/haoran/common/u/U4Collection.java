@@ -1,11 +1,12 @@
 package com.haoran.common.u;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import com.haoran.common.Constants;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
 import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.function.Supplier;
 
 /**
  * @author hanhaoran
@@ -13,145 +14,109 @@ import java.util.function.Function;
  */
 
 public final class U4Collection {
-    private U4Collection() {}
-
-    public static <E> ArrayList<E> toArrayList(String input, String separator, Function<String, ? extends E> action) {
-        if (U4Object.isNullOrEmpty(input)) {
-            return ((ArrayList<E>) Collections.emptyList());
-        }
-
-        U4Object.checkNotNull(separator, action);
-        String[] src = input.split(separator);
-        ArrayList<E> dest = Lists.newArrayListWithExpectedSize(src.length);
-        to(src, dest, action);
-        return dest;
+    private U4Collection() {
     }
 
-    public static <E> LinkedList<E> toLinkedList(String input, String separator, Function<String, ? extends E> action) {
+    public static <T, C extends Collection<T>> C toCollection(
+            String input,
+            String separator,
+            Function<String, ? extends T> toItemAction,
+            IntFunction<C> destSupplier,
+            Supplier<C> emptySupplier
+    ) {
+        U4Object.checkNotNull(separator, toItemAction, destSupplier, emptySupplier);
         if (U4Object.isNullOrEmpty(input)) {
-            return ((LinkedList<E>) Collections.emptyList());
+            return emptySupplier.get();
         }
 
-        U4Object.checkNotNull(separator, action);
-        String[] src = input.split(separator);
-        LinkedList<E> dest = Lists.newLinkedList();
-        to(src, dest, action);
-        return dest;
-    }
-
-    public static <E> HashSet<E> toHashSet(String input, String separator, Function<String, ? extends E> action) {
-        if (U4Object.isNullOrEmpty(input)) {
-            return ((HashSet<E>) Collections.emptySet());
-        }
-
-        U4Object.checkNotNull(separator, action);
-        String[] src = input.split(separator);
-        HashSet<E> dest = Sets.newHashSetWithExpectedSize(src.length);
-        to(src, dest, action);
-        return dest;
-    }
-
-    public static <E> LinkedHashSet<E> toLinkedHashSet(String input, String separator, Function<String, ? extends E> action) {
-        if (U4Object.isNullOrEmpty(input)) {
-            return ((LinkedHashSet<E>) Collections.emptySet());
-        }
-
-        U4Object.checkNotNull(separator, action);
-        String[] src = input.split(separator);
-        LinkedHashSet<E> dest = Sets.newLinkedHashSetWithExpectedSize(src.length);
-        to(src, dest, action);
-        return dest;
-    }
-
-    public static <E extends Comparable<E>> SortedSet<E> toSortedSet(String input, String separator, Function<String, ? extends E> action) {
-        if (U4Object.isNullOrEmpty(input)) {
-            return Collections.emptySortedSet();
-        }
-
-        U4Object.checkNotNull(separator, action);
-        String[] src = input.split(separator);
-        TreeSet<E> dest = Sets.newTreeSet();
-        to(src, dest, action);
-        return dest;
-    }
-
-    public static <K, V> HashMap<K, V> toHashMap(String input, String level1Separator, String level2Separator, Function<String, ? extends K> toKeyAction, Function<String, ? extends V> toValueAction) {
-        if (U4Object.isNullOrEmpty(input)) {
-            return ((HashMap<K, V>) Collections.emptyMap());
-        }
-
-        HashMap<K, V> dest = Maps.newHashMap();
-        to(input, level1Separator, level2Separator, dest, toKeyAction, toValueAction);
-        return dest;
-    }
-
-    public static <K, V> LinkedHashMap<K, V> toLinkedHashMap(String input, String level1Separator, String level2Separator, Function<String, ? extends K> toKeyAction, Function<String, ? extends V> toValueAction) {
-        if (U4Object.isNullOrEmpty(input)) {
-            return ((LinkedHashMap<K, V>) Collections.emptyMap());
-        }
-
-        LinkedHashMap<K, V> dest = Maps.newLinkedHashMap();
-        to(input, level1Separator, level2Separator, dest, toKeyAction, toValueAction);
-        return dest;
-    }
-
-    public static <K extends Comparable<K>, V> SortedMap<K, V> toSortedMap(String input, String level1Separator, String level2Separator, Function<String, ? extends K> toKeyAction, Function<String, ? extends V> toValueAction) {
-        if (U4Object.isNullOrEmpty(input)) {
-            return Collections.emptySortedMap();
-        }
-
-        TreeMap<K, V> dest = Maps.newTreeMap();
-        to(input, level1Separator, level2Separator, dest, toKeyAction, toValueAction);
-        return dest;
-    }
-
-    public static <K, V> void to(String input, String level1Separator, String level2Separator, Map<K, V> dest, Function<String, ? extends K> toKeyAction, Function<String, ? extends V> toValueAction) {
-        if (U4Object.isNullOrEmpty(input)) {
-            return;
-        }
-
-        U4Object.checkNotNull(level1Separator, level2Separator, dest, toKeyAction, toValueAction);
-        String[] arrays = input.split(level1Separator);
-        for (String array: arrays) {
-            if (U4Object.isNullOrEmpty(array)) {
+        String[] inputs = input.split(separator);
+        C dest = destSupplier.apply(inputs.length);
+        for (String value: inputs) {
+            T item = toItemAction.apply(value);
+            if (U4Object.isNull(item)) {
                 continue;
             }
-
-            if (U4Object.isNullOrEmpty(array.trim())) {
-                continue;
-            }
-
-            String[] kvs = array.split(level2Separator);
-            K key = toKeyAction.apply(kvs[0]);
-            V value = toValueAction.apply(kvs[1]);
-            dest.put(key, value);
+            dest.add(item);
         }
+        return dest;
     }
 
-    public static <E> void to(String input, String separator, Collection<E> dest, Function<String, ? extends E> action) {
+    public static <S, T, C extends Collection<T>> C toCollection(
+            S[] inputs,
+            Function<? super S, ? extends T> toItemAction,
+            IntFunction<C> destSupplier,
+            Supplier<C> emptySupplier
+    ) {
+        U4Object.checkNotNull(toItemAction, destSupplier, emptySupplier);
+        if (U4Object.isNullOrEmpty(inputs)) {
+            return emptySupplier.get();
+        }
+
+        C dest = destSupplier.apply(inputs.length);
+        for (S value: inputs) {
+            T item = toItemAction.apply(value);
+            if (U4Object.isNull(item)) {
+                continue;
+            }
+            dest.add(item);
+        }
+        return dest;
+    }
+
+    public static <K, V, M extends Map<K, V>> M toMap(
+            String input,
+            String separator,
+            String keyValSeparator,
+            Function<String, ? extends K> toKeyAction,
+            Function<String, ? extends V> toValAction,
+            IntFunction<M> destSupplier,
+            Supplier<M> emptySupplier
+    ) {
+        U4Object.checkNotNull(separator, keyValSeparator, toKeyAction, toValAction, destSupplier, emptySupplier);
         if (U4Object.isNullOrEmpty(input)) {
-            return;
+            return emptySupplier.get();
         }
 
-        U4Object.checkNotNull(separator, dest, action);
-        String[] src = input.split(separator);
-        to(src, dest, action);
+        String[] entries = input.split(separator);
+        M dest = destSupplier.apply(entries.length);
+        for (String entry: entries) {
+            String[] keyVal = entry.split(keyValSeparator);
+            if (keyVal.length != Constants.INT2) {
+                continue;
+            }
+            K key = toKeyAction.apply(keyVal[0]);
+            V val = toValAction.apply(keyVal[1]);
+            dest.put(key, val);
+        }
+        return dest;
     }
 
-    private static <E> void to(String[] src, Collection<E> dest, Function<String, ? extends E> action) {
-        for (String before : src) {
-            if (U4Object.isNullOrEmpty(before)) {
-                continue;
-            }
-
-            if (U4Object.isNullOrEmpty(before.trim())) {
-                continue;
-            }
-
-            E after = action.apply(before);
-            if (U4Object.nonNull(after)) {
-                dest.add(after);
-            }
+    public static <K, V, C extends Collection<V>, M extends Map<K, C>> M toMap(
+            String input,
+            String separator,
+            String keyValSeparator,
+            Function<String, ? extends K> toKeyAction,
+            Function<String, ? extends V> toValAction,
+            Supplier<C> valContainerSupplier,
+            IntFunction<M> destSupplier,
+            Supplier<M> emptySupplier
+    ) {
+        U4Object.checkNotNull(separator, keyValSeparator, toKeyAction, toValAction, valContainerSupplier, destSupplier, emptySupplier);
+        if (U4Object.isNullOrEmpty(input)) {
+            return emptySupplier.get();
         }
+
+        String[] entries = input.split(separator);
+        M dest = destSupplier.apply(entries.length);
+        for (String entry: entries) {
+            String[] keyVal = entry.split(keyValSeparator);
+            if (keyVal.length != Constants.INT2) {
+                continue;
+            }
+            K key = toKeyAction.apply(keyVal[0]);
+            V val = toValAction.apply(keyVal[1]);
+            dest.computeIfAbsent(key, k -> valContainerSupplier.get()).add(val);
+        }
+        return dest;
     }
 }

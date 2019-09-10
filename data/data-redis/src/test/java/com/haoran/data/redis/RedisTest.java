@@ -1,12 +1,8 @@
 package com.haoran.data.redis;
 
-import com.haoran.common.Parser;
-import com.haoran.common.u.U4Collection;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
-
-import static com.haoran.common.u.U4Collection.*;
 
 /**
  * @author hanhaoran

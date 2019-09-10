@@ -5,7 +5,7 @@ package com.haoran.common;
  * @date 2019/5/12 18:32
  */
 
-public class Wrapper {
+public final class Wrapper {
     private Wrapper() {}
 
     public static <E1, E2> W2<E1, E2> create(E1 e1, E2 e2) {

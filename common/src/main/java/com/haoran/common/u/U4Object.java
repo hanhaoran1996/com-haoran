@@ -1,6 +1,7 @@
 package com.haoran.common.u;
 
 import com.google.common.base.Preconditions;
+import com.haoran.common.Constants;
 
 import java.util.Collection;
 import java.util.Map;
@@ -75,6 +76,16 @@ public final class U4Object {
 
     public static boolean nonNullOrEmpty(Map<?, ?> map) {
         return nonNull(map) && !map.isEmpty();
+    }
+
+    @SafeVarargs
+    public static <T> boolean isNullOrEmpty(T ... args) {
+        return isNull(args) || args.length == Constants.INT0;
+    }
+
+    @SafeVarargs
+    public static <T> boolean nonNullOrEmpty(T ... args) {
+        return nonNull(args) && args.length != Constants.INT0;
     }
 
 }
