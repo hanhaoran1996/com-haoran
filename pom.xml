@@ -5,11 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.haoran</groupId>
-    <artifactId>super-pom</artifactId>
+    <artifactId>super</artifactId>
     <version>1.0.0</version>
     <modules>
-        <module>common</module>
-        <module>data</module>
+        <module>com-haoran-common</module>
+        <module>com-haoran-data</module>
+        <module>app</module>
     </modules>
 
     <packaging>pom</packaging>
