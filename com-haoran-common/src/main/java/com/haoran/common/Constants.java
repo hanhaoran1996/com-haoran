@@ -68,4 +68,6 @@ public final class Constants {
     public static final String OK = O + K;
 
     public static final String[] EMPTY_STRING_ARRAY = {};
+
+    public static final Object[] EMPTY_ARRAY = {};
 }

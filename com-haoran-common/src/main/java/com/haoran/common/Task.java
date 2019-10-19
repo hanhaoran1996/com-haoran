@@ -29,7 +29,7 @@ public final class Task {
     );
 
     static {
-        Runtime.getRuntime().addShutdownHook(new Thread(POOL::shutdown));
+        Runtime.getRuntime().addShutdownHook(Executors.defaultThreadFactory().newThread(POOL::shutdown));
     }
 
     public void execute(Runnable command) {
