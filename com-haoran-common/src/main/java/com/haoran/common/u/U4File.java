@@ -106,7 +106,7 @@ public final class U4File {
         }
     }
 
-    /* read2PropertiesWithoutCloseStream ---------------------------------------------------------------------------------------------- */
+    /* read2PropertiesWithOrWithoutCloseStream ---------------------------------------------------------------------------------------------- */
 
     public static Properties read2Properties(String filename) {
         return read2Properties(filename, UTF8);
