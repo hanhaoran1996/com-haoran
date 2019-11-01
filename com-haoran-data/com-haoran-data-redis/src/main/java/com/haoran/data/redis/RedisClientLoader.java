@@ -16,8 +16,9 @@ import java.util.concurrent.TimeUnit;
  * @author hanhaoran
  * @date 2019/9/1 13:24
  */
-
 class RedisClientLoader {
+    private RedisClientLoader() {}
+
     static Jedis load() {
         return Handler.INSTANCE;
     }
@@ -56,7 +57,7 @@ class RedisClientLoader {
             }
             INSTANCE = j;
             Runtime.getRuntime().addShutdownHook(Executors.defaultThreadFactory().newThread(INSTANCE::close));
-            logger.info("redis client init success with " + stopwatch.stop().elapsed(TimeUnit.MILLISECONDS) + " ms...");
+            logger.info("redis client init success with {} ms...", stopwatch.stop().elapsed(TimeUnit.MILLISECONDS));
         }
     }
 }

@@ -12,7 +12,6 @@ import java.util.concurrent.*;
  * @author hanhaoran
  * @date 2019/8/24 12:16
  */
-
 public final class Task {
     private Task() {}
 
@@ -25,7 +24,7 @@ public final class Task {
             TimeUnit.SECONDS,
             new LinkedBlockingQueue<>(Constants.INT128),
             new ThreadFactoryBuilder().setDaemon(true).setNameFormat("task-pool-%d").build(),
-            (r, executor) -> LOGGER.warn("Task " + r.toString() + " ignored by " + executor.toString())
+            (r, executor) -> LOGGER.warn("Task {} ignored by {}", r.toString(), executor.toString())
     );
 
     static {

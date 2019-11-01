@@ -15,7 +15,6 @@ import java.util.Properties;
  * @author hr.han
  * @date 2019/5/12 20:17
  */
-
 public final class NtConfig {
     private NtConfig() {}
 
@@ -61,9 +60,9 @@ public final class NtConfig {
 
         logger.info("********************************************************************");
         logger.info("****** APP CONFIGS *************************************************");
-        logger.info("****************** app id: " + APP_ID);
-        logger.info("****************** jdk version: " + JDK_VERSION);
-        logger.info("****************** config path: " + CONFIG_PATH);
+        logger.info("****************** app id: {}", APP_ID);
+        logger.info("****************** jdk version: {}", JDK_VERSION);
+        logger.info("****************** config path: {}", CONFIG_PATH);
         logger.info("********************************************************************");
     }
 

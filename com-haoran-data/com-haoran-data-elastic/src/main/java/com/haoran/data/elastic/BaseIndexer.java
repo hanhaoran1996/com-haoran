@@ -16,7 +16,6 @@ import java.util.List;
  * @author hr.han
  * @date 2019/6/13 19:35
  */
-
 public class BaseIndexer<T extends Doc> {
 
     protected static final TransportClient TC = CommonIndexer.TC;

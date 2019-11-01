@@ -4,9 +4,7 @@ package com.haoran.common;
  * @author ihhr
  * @date 2018/8/24
  */
-
 public final class Constants {
-
     private Constants() {}
 
     public static final int ZERO     = 0;

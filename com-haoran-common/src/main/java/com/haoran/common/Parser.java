@@ -9,10 +9,8 @@ import java.util.function.Function;
  * @author hr.han
  * @date 2019/5/12 20:25
  */
-
 public final class Parser {
-    private Parser() {
-    }
+    private Parser() {}
 
     private static final Character CHARACTER = ' ';
     private static final Boolean BOOLEAN = Boolean.FALSE;

@@ -14,7 +14,6 @@ import static com.haoran.common.Constants.OK;
  * @author hanhaoran
  * @date 2019/9/1 13:48
  */
-
 public final class Redis {
     private static final Logger logger = LoggerFactory.getLogger(Redis.class);
 

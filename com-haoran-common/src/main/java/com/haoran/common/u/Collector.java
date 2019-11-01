@@ -1,5 +1,7 @@
 package com.haoran.common.u;
 
+import com.google.common.annotations.Beta;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -9,7 +11,7 @@ import java.util.function.Function;
  * @author hanhaoran
  * @date 2019/9/23 15:17
  */
-
+@Beta
 public class Collector<S, T> {
 
     public static <S, T> Collector<S, T> ofArrays() {

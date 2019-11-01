@@ -4,7 +4,6 @@ package com.haoran.common;
  * @author hr.han
  * @date 2019/5/12 18:32
  */
-
 public final class Wrapper {
     private Wrapper() {}
 

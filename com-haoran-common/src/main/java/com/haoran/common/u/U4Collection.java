@@ -12,7 +12,6 @@ import java.util.function.Supplier;
  * @author hanhaoran
  * @date 2019/8/24 10:36
  */
-
 public final class U4Collection {
     private U4Collection() {
     }

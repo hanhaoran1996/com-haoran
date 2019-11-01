@@ -21,8 +21,9 @@ import java.util.concurrent.TimeUnit;
  * @author hr.han
  * @date 2019/6/5 10:06
  */
-
 class ElasticClientLoader {
+    private ElasticClientLoader() {}
+
     static TransportClient load() {
         return Handler.INSTANCE;
     }
@@ -81,7 +82,7 @@ class ElasticClientLoader {
 
             INSTANCE = tc;
             Runtime.getRuntime().addShutdownHook(Executors.defaultThreadFactory().newThread(INSTANCE::close));
-            logger.info("ElasticSearch client init success with " + stopwatch.stop().elapsed(TimeUnit.MILLISECONDS) + " ms...");
+            logger.info("ElasticSearch client init success with {} ms...", stopwatch.stop().elapsed(TimeUnit.MILLISECONDS));
         }
     }
 

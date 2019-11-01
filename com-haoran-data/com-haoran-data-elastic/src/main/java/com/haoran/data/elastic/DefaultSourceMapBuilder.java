@@ -15,8 +15,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author hr.han
  * @date 2019/6/15 15:47
  */
-
 class DefaultSourceMapBuilder {
+    private DefaultSourceMapBuilder() {}
+
     private static final Logger logger = LoggerFactory.getLogger(DefaultSourceMapBuilder.class);
 
     private static final Map<Class<?>, Map<String, Field>> CACHE = new ConcurrentHashMap<>();

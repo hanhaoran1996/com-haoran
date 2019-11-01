@@ -19,23 +19,24 @@ import java.util.List;
  * @author hr.han
  * @date 2019/6/14 13:53
  */
+class CommonIndexer {
+    private CommonIndexer() {}
 
-public class CommonIndexer {
     static final TransportClient TC = ElasticClientLoader.load();
 
-    public static <T extends Doc> ActionFuture<IndexResponse> insert(T doc) {
+    static <T extends Doc> ActionFuture<IndexResponse> insert(T doc) {
         return TC.index(buildIndexRequest(doc));
     }
 
-    public static <T extends Doc> void insert(T doc, ActionListener<IndexResponse> listener) {
+    static <T extends Doc> void insert(T doc, ActionListener<IndexResponse> listener) {
         TC.index(buildIndexRequest(doc), listener);
     }
 
-    public static <T extends Doc> ActionFuture<BulkResponse> insert(List<T> docs) {
+    static <T extends Doc> ActionFuture<BulkResponse> insert(List<T> docs) {
         return TC.bulk(buildIndexBulkRequest(docs));
     }
 
-    public static <T extends Doc> void insert(List<T> docs, ActionListener<BulkResponse> listener) {
+    static <T extends Doc> void insert(List<T> docs, ActionListener<BulkResponse> listener) {
         TC.bulk(buildIndexBulkRequest(docs), listener);
     }
 
@@ -58,35 +59,35 @@ public class CommonIndexer {
                 .source(doc.getSourceMap());
     }
 
-    public static <T extends Doc> ActionFuture<UpdateResponse> update(T doc) {
+    static <T extends Doc> ActionFuture<UpdateResponse> update(T doc) {
         return TC.update(buildUpdateRequest(doc, false));
     }
 
-    public static <T extends Doc> void update(T doc, ActionListener<UpdateResponse> listener) {
+    static <T extends Doc> void update(T doc, ActionListener<UpdateResponse> listener) {
         TC.update(buildUpdateRequest(doc, false), listener);
     }
 
-    public static <T extends Doc> ActionFuture<BulkResponse> update(List<T> docs) {
+    static <T extends Doc> ActionFuture<BulkResponse> update(List<T> docs) {
         return TC.bulk(buildUpdateBulkRequest(docs, false));
     }
 
-    public static <T extends Doc> void update(List<T> docs, ActionListener<BulkResponse> listener) {
+    static <T extends Doc> void update(List<T> docs, ActionListener<BulkResponse> listener) {
         TC.bulk(buildUpdateBulkRequest(docs, false), listener);
     }
 
-    public static <T extends Doc> ActionFuture<UpdateResponse> upsert(T doc) {
+    static <T extends Doc> ActionFuture<UpdateResponse> upsert(T doc) {
         return TC.update(buildUpdateRequest(doc, true));
     }
 
-    public static <T extends Doc> void upsert(T doc, ActionListener<UpdateResponse> listener) {
+    static <T extends Doc> void upsert(T doc, ActionListener<UpdateResponse> listener) {
         TC.update(buildUpdateRequest(doc, true), listener);
     }
 
-    public static <T extends Doc> ActionFuture<BulkResponse> upsert(List<T> docs) {
+    static <T extends Doc> ActionFuture<BulkResponse> upsert(List<T> docs) {
         return TC.bulk(buildUpdateBulkRequest(docs, true));
     }
 
-    public static <T extends Doc> void upsert(List<T> docs, ActionListener<BulkResponse> listener) {
+    static <T extends Doc> void upsert(List<T> docs, ActionListener<BulkResponse> listener) {
         TC.bulk(buildUpdateBulkRequest(docs, true), listener);
     }
 
@@ -110,19 +111,19 @@ public class CommonIndexer {
                 .docAsUpsert(upsert);
     }
 
-    public static <T extends Doc> ActionFuture<DeleteResponse> delete(T doc) {
+    static <T extends Doc> ActionFuture<DeleteResponse> delete(T doc) {
         return TC.delete(buildDeleteRequest(doc));
     }
 
-    public static <T extends Doc> void delete(T doc, ActionListener<DeleteResponse> listener) {
+    static <T extends Doc> void delete(T doc, ActionListener<DeleteResponse> listener) {
         TC.delete(buildDeleteRequest(doc), listener);
     }
 
-    public static <T extends Doc> ActionFuture<BulkResponse> delete(List<T> docs) {
+    static <T extends Doc> ActionFuture<BulkResponse> delete(List<T> docs) {
         return TC.bulk(buildDeleteBulkRequest(docs));
     }
 
-    public static <T extends Doc> void delete(List<T> docs, ActionListener<BulkResponse> listener) {
+    static <T extends Doc> void delete(List<T> docs, ActionListener<BulkResponse> listener) {
         TC.bulk(buildDeleteBulkRequest(docs), listener);
     }
 

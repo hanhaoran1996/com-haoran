@@ -8,8 +8,8 @@ import java.util.Map;
  * @author hr.han
  * @date 2019/6/13 19:08
  */
-
 public interface Doc extends Serializable {
+
     String FIELD_INDEX = "index";
     String FIELD_TYPE = "type";
     String FIELD_ID = "id";

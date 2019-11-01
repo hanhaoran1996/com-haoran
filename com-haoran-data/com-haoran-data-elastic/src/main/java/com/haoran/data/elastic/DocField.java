@@ -8,7 +8,6 @@ import java.lang.annotation.*;
  * @author hr.han
  * @date 2019/6/5 10:01
  */
-
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
